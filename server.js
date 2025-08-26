@@ -12,7 +12,6 @@ import authRouter from './routers/authRouter.js';
 const app = express();
 dotenv.config();
 app.use(express.json());
-app.use('/api/v1/auth', authRouter);
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
@@ -29,6 +28,8 @@ app.post('/', (req, res) => {
 });
 
 app.use('/api/v1/jobs', jobRouter);
+
+app.use('/api/v1/auth', authRouter);
 
 app.use('*', (req, res) => {
   res.status(404).json({ msg: 'not found' });
