@@ -3,7 +3,6 @@ import Wrapper from '../assets/wrappers/DashboardFormPage';
 import { Form, useSubmit, Link } from 'react-router-dom';
 import { JOB_TYPE, JOB_STATUS, JOB_SORT_BY } from '../../../utils/constants';
 import { useAllJobsContext } from '../pages/AllJobs';
-
 const SearchContainer = () => {
   const { searchValues } = useAllJobsContext();
   const { search, jobStatus, jobType, sort } = searchValues;
@@ -23,7 +22,7 @@ const SearchContainer = () => {
 
   return (
     <Wrapper>
-      <Form className='form' method='get'>
+      <Form className='form'>
         <h5 className='form-title'>search form</h5>
         <div className='form-center'>
           {/* search position */}
@@ -33,7 +32,7 @@ const SearchContainer = () => {
             name='search'
             defaultValue={search}
             onChange={debounce((form) => {
-              submit(form, { method: 'get' });
+              submit(form);
             })}
           />
           <FormRowSelect
@@ -42,7 +41,7 @@ const SearchContainer = () => {
             list={['all', ...Object.values(JOB_STATUS)]}
             defaultValue={jobStatus}
             onChange={(e) => {
-              submit(e.currentTarget.form, { method: 'get' });
+              submit(e.currentTarget.form);
             }}
           />
           <FormRowSelect
@@ -51,7 +50,7 @@ const SearchContainer = () => {
             defaultValue={jobType}
             list={['all', ...Object.values(JOB_TYPE)]}
             onChange={(e) => {
-              submit(e.currentTarget.form, { method: 'get' });
+              submit(e.currentTarget.form);
             }}
           />
           <FormRowSelect
@@ -59,7 +58,7 @@ const SearchContainer = () => {
             defaultValue={sort}
             list={[...Object.values(JOB_SORT_BY)]}
             onChange={(e) => {
-              submit(e.currentTarget.form, { method: 'get' });
+              submit(e.currentTarget.form);
             }}
           />
           <Link to='/dashboard/all-jobs' className='btn form-btn delete-btn'>

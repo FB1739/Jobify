@@ -9,6 +9,8 @@
     "server": "nodemon server",
     "client": "cd client && npm run dev",
     "dev": "concurrently --kill-others-on-fail \" npm run server\" \" npm run client\"",
+    "build": "cd client && npm run build",
+    "start": "node server",
     "clear": "rm -rf node_modules client/node_modules package-lock.json client/package-lock.json"
   },
   "keywords": [],
