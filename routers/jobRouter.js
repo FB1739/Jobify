@@ -7,7 +7,7 @@ import {
   updateJob,
   deleteJob,
   showStats,
-} from '../controllers/JobController.js';
+} from '../controllers/jobController.js';
 import { checkForTestUser } from '../middleware/authMiddleware.js';
 
 const router = Router();
