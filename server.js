@@ -5,6 +5,10 @@ import mongoose from 'mongoose';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import 'express-async-errors';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+import path from 'path';
+import cloudinary from 'cloudinary';
 
 // Imports - Routers
 import jobRouter from './routers/jobRouter.js';
@@ -19,14 +23,22 @@ import { authenticateUser } from './middleware/authMiddleware.js';
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 5100;
+const __dirname = dirname(fileURLToPath(import.meta.url));
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_API_KEY,
+  api_secret: process.env.CLOUD_API_SECRET,
+});
 
 // Middleware
-app.use(express.json());
-app.use(cookieParser());
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
+app.use(express.json());
+app.use(cookieParser());
+app.use(express.static(path.resolve(__dirname, './public')));
+
 
 // Routes - Test
 app.get('/', (req, res) => {
